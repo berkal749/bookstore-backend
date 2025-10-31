@@ -9,10 +9,10 @@ const app = express();
 // midlware to handle cors error
 app.use(
   cors({
-    origin: [
+    origin: 
       'https://cute-kleicha-f8773a.netlify.app',
-      'http://localhost:5173'  // Your Vite frontend URL
-    ],
+       // Your Vite frontend URL
+    
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
