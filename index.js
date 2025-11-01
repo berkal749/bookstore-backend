@@ -6,21 +6,20 @@ import cors from "cors";
 
 const app = express();
 
-// midlware to handle cors error
 const allowedOrigins = [
-  "https://cute-kleicha-f8773a.netlify.app",
-  "http://localhost:5173" // keep this for local testing
+  "http://localhost:5173",                   // for local dev
+  "https://cute-kleicha-f8773a.netlify.app"  // your deployed frontend
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps, curl, etc.)
+      // allow requests with no origin (like curl, Postman)
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       } else {
-        return callback(new Error("CORS not allowed from this origin: " + origin), false);
+        return callback(new Error("Not allowed by CORS: " + origin));
       }
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
