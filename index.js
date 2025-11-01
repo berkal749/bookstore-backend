@@ -7,12 +7,22 @@ import cors from "cors";
 const app = express();
 
 // midlware to handle cors error
+const allowedOrigins = [
+  "https://cute-kleicha-f8773a.netlify.app",
+  "http://localhost:5173" // keep this for local testing
+];
+
 app.use(
   cors({
-    origin: 
-      'https://cute-kleicha-f8773a.netlify.app',
-       // Your Vite frontend URL
-    
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps, curl, etc.)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("CORS not allowed from this origin: " + origin), false);
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
