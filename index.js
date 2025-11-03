@@ -9,7 +9,7 @@ const app = express();
 // allow specific local dev origins
 app.use(
   cors({
-    origin: ["http://localhost:8080", "http://localhost:5173","https://cute-kleicha-2.netlify.app/"],
+    origin: ["http://localhost:8080", "http://localhost:5173","https://cute-kleicha-2.netlify.app"],
     credentials: true,
   })
 );
