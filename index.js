@@ -6,23 +6,10 @@ import cors from "cors";
 
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:5173",                   // for local dev
-  "https://cute-kleicha-f8773a.netlify.app"  // your deployed frontend
-];
-
+// allow specific local dev origins
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow requests with no origin (like curl, Postman)
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error("Not allowed by CORS: " + origin));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: ["http://localhost:8080", "http://localhost:5173"],
     credentials: true,
   })
 );
